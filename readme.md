@@ -9,15 +9,11 @@ docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicser
 
 <figure><img src="./images/docker-container.png"></figure>
 
-I am able to configure:
-
-<figure><img src="./images/AzureDataStudio-config.png"></figure>
-
-and connect with Azure Data Studio:
+I am able to configure and connect with Azure Data Studio:
 
 <figure><img src="./images/AzureDataStudio-connects.png"></figure>
 
-I have installed the ODBC driver per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16):
+I have installed the ODBC driver (per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16)), like this:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
