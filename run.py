@@ -6,9 +6,9 @@ from sqlalchemy import CHAR, Column, DateTime, Float, ForeignKey, Index, Integer
 
 # db: docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
 
-engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
-# times out: engine = create_engine("mssql+pyodbc://SA:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
-# times out: engine = create_engine("mssql+pyodbc://SA:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
+# Connection refused engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
+# times out: engine = create_engine("mssql+pyodbc://sa:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
+engine = create_engine("mssql+pyodbc://sa:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
 
 metadata = MetaData(engine)
 metadata.reflect(engine)
