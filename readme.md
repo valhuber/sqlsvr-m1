@@ -10,11 +10,11 @@ I have:
 docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
 ```
 
-<figure><img src="./images/docker-container.png"></figure>
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/docker-container.png?raw=true"></figure>
 
 I am able to configure and connect with Azure Data Studio:
 
-<figure><img src="./images/AzureDataStudio-connects.png"></figure>
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/AzureDataStudio-connects.png?raw=true"></figure>
 
 While Azure Data Studio did not require it, I also configured the database for remote access:
 
