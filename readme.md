@@ -123,3 +123,12 @@ SQLAlchemy==1.4.29
 `run.py` does open the database, but no tables and relect fails
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/no-tables.png?raw=true"></figure>
+
+&nbsp;
+
+## Basic ODBC
+
+Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!).  It also just exits without a stacktrace:
+
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic_odbc.png?raw=true"></figure>
+

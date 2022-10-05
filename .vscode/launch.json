@@ -5,11 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run",
+            "name": "Run SQLAlchemy",
             "type": "python",
             "request": "launch",
             "justMyCode": false,
             "program": "run.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Run ODBC",
+            "type": "python",
+            "request": "launch",
+            "justMyCode": false,
+            "program": "basic_odbc.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
