@@ -10,6 +10,6 @@ from sqlalchemy import CHAR, Column, DateTime, Float, ForeignKey, Index, Integer
 engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
 
 metadata = MetaData(engine)
-metadata.reflect(engine)
+metadata.reflect(engine)  # exits here without message
 
 print("open with metadata")

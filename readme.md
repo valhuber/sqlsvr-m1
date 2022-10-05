@@ -41,120 +41,78 @@ It gets _connection refused_, I suspect due to odbc install/configure.:
 ```log
 (venv) val@Vals-MPB-14 sqlsvr-m1 %  cd /Users/val/dev/examples/sqlsvr-m1 ; /usr/bin/env /Users/val/dev/examples/sqlsvr
 -m1/venv/bin/python /Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/a
-dapter/../../debugpy/launcher 62131 -- run.py 
+dapter/../../debugpy/launcher 62414 -- run.py 
 Traceback (most recent call last):
   File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3250, in _wrap_pool_connect
-    return fn()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 310, in connect
-    return _ConnectionFairy._checkout(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 868, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 476, in checkout
-    rec = pool._do_get()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
-    with util.safe_reraise():
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
-    return self._create_connection()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 256, in _create_connection
-    return _ConnectionRecord(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 371, in __init__
-    self.__connect()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 665, in __connect
-    with util.safe_reraise():
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
-    self.dbapi_connection = connection = pool._invoke_creator(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 590, in connect
-    return dialect.connect(*cargs, **cparams)
+....
   File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 597, in connect
     return self.dbapi.connect(*cargs, **cparams)
 pyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired (0) (SQLDriverConnect)')
 
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39, in <module>
-    cli.main()
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430, in main
-    run()
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284, in run_file
-    runpy.run_path(target, run_name="__main__")
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321, in run_path
-    return _run_module_code(code, init_globals, run_name,
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135, in _run_module_code
-    _run_code(code, mod_globals, init_globals,
-  File "/Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124, in _run_code
-    exec(code, run_globals)
-  File "run.py", line 14, in <module>
-    metadata.reflect(engine)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/sql/schema.py", line 4697, in reflect
-    with inspection.inspect(bind)._inspection_context() as insp:
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/inspection.py", line 64, in inspect
-    ret = reg(subject)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/reflection.py", line 182, in _engine_insp
-    return Inspector._construct(Inspector._init_engine, bind)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/reflection.py", line 117, in _construct
-    init(self, bind)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/reflection.py", line 128, in _init_engine
-    engine.connect().close()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3204, in connect
-    return self._connection_cls(self, close_with_result=close_with_result)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
-    else engine.raw_connection()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3283, in raw_connection
-    return self._wrap_pool_connect(self.pool.connect, _connection)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3253, in _wrap_pool_connect
-    Connection._handle_dbapi_exception_noconnection(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2100, in _handle_dbapi_exception_noconnection
-    util.raise_(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3250, in _wrap_pool_connect
-    return fn()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 310, in connect
-    return _ConnectionFairy._checkout(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 868, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 476, in checkout
-    rec = pool._do_get()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
-    with util.safe_reraise():
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
-    return self._create_connection()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 256, in _create_connection
-    return _ConnectionRecord(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 371, in __init__
-    self.__connect()
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 665, in __connect
-    with util.safe_reraise():
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
-    self.dbapi_connection = connection = pool._invoke_creator(self)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 590, in connect
-    return dialect.connect(*cargs, **cparams)
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 597, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-sqlalchemy.exc.OperationalError: (pyodbc.OperationalError) ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired (0) (SQLDriverConnect)')
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
 (venv) val@Vals-MPB-14 sqlsvr-m1 % 
 ```
 
-The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8592).
+The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8604).
+
+## ODBC Driver procedure
+
+Using [this article (thanks!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we use the following procedure/
+
+#### 1. Download `pyodbc-4.0.32.tar.gz`
+
+I had to unpack it (perhaps due to unfamiliarity with tar files):
+
+<figure><img src="./images/pyodbc.png"></figure>
+
+
+#### 2. Verify `unixodbc`
+
+```
+val@Vals-MPB-14 ~ %  brew install unixodbc
+Running `brew update --auto-update`...
+==> Auto-updated Homebrew!
+Updated 1 tap (homebrew/core).
+==> New Formulae
+curlcpp
+
+Warning: unixodbc 2.3.11 is already installed and up-to-date.
+```
+
+It's here:
+
+<figure><img src="./images/unixodbc.png"></figure>
+
+
+#### 3. Rebuild `pyodbc'
+
+And alter the provided rebuild script:
+
+
+```
+pip uninstall pyodbc
+export CPPFLAGS="-I/opt/homebrew/Cellar/unixodbc/2.3.11/include"
+export LDFLAGS="-L/opt/homebrew/Cellar/unixodbc/2.3.11/lib -liodbc -liodbcinst"
+echo "path/to/pyodbc-4.0.32.tar.gz"
+cd /Users/val/dev/pyodbc
+echo "pip install pyodbc-4.0.32.tar.gz failed -- no gz?"
+pip install pyodbc
+```
+
+and then run in the venv:
+
+```
+(venv) val@Vals-MPB-14 pyodbc % pip install pyodbc       
+Collecting pyodbc
+  Using cached pyodbc-4.0.34.tar.gz (271 kB)
+  Preparing metadata (setup.py) ... done
+Using legacy 'setup.py install' for pyodbc, since package 'wheel' is not installed.
+Installing collected packages: pyodbc
+  Running setup.py install for pyodbc ... done
+Successfully installed pyodbc-4.0.34
+
+(venv) val@Vals-MPB-14 pyodbc % pip freeze
+pyodbc==4.0.34
+SQLAlchemy==1.4.29
+(venv) val@Vals-MPB-14 pyodbc % 
+```
+
