@@ -1,7 +1,10 @@
 # Test Description
 
+I have:
 
-I have a SqlServer database, running on __M1__ Mac, under Docker:
+* an __M1__ Mac
+* Python 3.10.6
+* Running a SqlServer database under Docker:
 
 ```
 docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
