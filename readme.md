@@ -13,6 +13,13 @@ I am able to configure and connect with Azure Data Studio:
 
 <figure><img src="./images/AzureDataStudio-connects.png"></figure>
 
+While Azure Data Studio did not require it, I also configured the database for remote access:
+
+```
+EXEC sp_configure 'remote access', 1;
+RECONFIGURE
+```
+
 I have installed the ODBC driver (per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16)), like this:
 
 ```bash
@@ -23,6 +30,13 @@ HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 ```
 
 When running this app with the following connect string:
+
+```python
+# times out: engine = create_engine("mssql+pyodbc://sa:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
+engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
+```
+
+It gets _connection refused_, I suspect due to odbc install/configure.:
 
 ```log
 (venv) val@Vals-MPB-14 sqlsvr-m1 %  cd /Users/val/dev/examples/sqlsvr-m1 ; /usr/bin/env /Users/val/dev/examples/sqlsvr
@@ -142,8 +156,5 @@ sqlalchemy.exc.OperationalError: (pyodbc.OperationalError) ('HYT00', '[HYT00] [M
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
 (venv) val@Vals-MPB-14 sqlsvr-m1 % 
 ```
-
-the connect times out, I suspect due to odbc install/configure.
-
 
 The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8592).
