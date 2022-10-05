@@ -1,35 +1,26 @@
 # Test Description
 
 
-I have a postgres (PostgreSQL) 13.4 (Debian 13.4-1.pgdg100+1) database, running on Mac, under docker:
+I have a SqlServer database, running on __M1__ Mac, under Docker:
 
 ```
-docker run -d --name postgresql-container --net dev-network -p 5432:5432 -e PGDATA=/pgdata -e POSTGRES_PASSWORD=p apilogicserver/postgres:version1.0.2
+docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
 ```
 
-The following table uses `bpchar` for a datatype:
+I am able to connect with Azure Data Studio:
 
-<figure><img src="./images/table-def.png"></figure>
+<figure><img src="./images/AzureDataStudio-connects.png"></figure>
 
-When running the `reflect` code under `SQLAlchemy==1.4.29`, I get the following console log:
+I have installed the ODBC driver per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16):
 
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 ```
-/Users/val/dev/examples/postgres_bpchar/run.py:7: SAWarning: Did not recognize type 'bpchar' of column 'customer_id'
-```
 
-The metadata sees this as `nulltype`:
+When running this app, the connect times out, I suspect due to odbc install/configure.
 
-<figure><img src="./images/null-type.png"></figure>
 
-# Questions
-
-My questions are:
-
-1. Is `bpchar` supported in the postgres dialect?
-   * I thought that the dialect was inferred from the uri `postgresql`.
-   * I _no such module_ with `postgres+psycopg2`
-2. If not, how can I recover the original type?
-
-# Logged as
-
-Issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8592).
+The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8592).
