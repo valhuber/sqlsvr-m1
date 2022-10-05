@@ -80,13 +80,12 @@ Warning: unixodbc 2.3.11 is already installed and up-to-date.
 
 It's here:
 
-<figure><img src="./images/unixodbc.png"></figure>
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/unixodbc.png?raw=true"></figure>
 
 
 #### 3. Rebuild `pyodbc'
 
 And alter the provided rebuild script:
-
 
 ```
 pip uninstall pyodbc
