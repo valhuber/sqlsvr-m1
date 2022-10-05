@@ -7,7 +7,13 @@ I have a SqlServer database, running on __M1__ Mac, under Docker:
 docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
 ```
 
-I am able to connect with Azure Data Studio:
+<figure><img src="./images/docker-container.png"></figure>
+
+I am able to configure:
+
+<figure><img src="./images/AzureDataStudio-config.png"></figure>
+
+and connect with Azure Data Studio:
 
 <figure><img src="./images/AzureDataStudio-connects.png"></figure>
 
