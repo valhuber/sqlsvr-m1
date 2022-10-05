@@ -62,7 +62,7 @@ Using [this article (thanks!)](https://whodeenie.medium.com/installing-pyodbc-an
 
 I had to unpack it (perhaps due to unfamiliarity with tar files):
 
-<figure><img src="./images/pyodbc.png"></figure>
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/pyodbc.png?raw=true"></figure>
 
 
 #### 2. Verify `unixodbc`
