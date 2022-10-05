@@ -57,7 +57,7 @@ pyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL S
 
 The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8604).
 
-## ODBC Driver procedure
+## I. ODBC Driver procedure
 
 Using [this article (thanks!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we use the following procedure/
 
@@ -128,7 +128,14 @@ SQLAlchemy==1.4.29
 
 ## Basic ODBC
 
-Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!).  It also just exits without a stacktrace:
+Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!). 
+
+### Using __I. ODBC Driver Procedure__
+It also just exits without a stacktrace:
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic_odbc.png?raw=true"></figure>
+
+### Using `requirements.txt`
+
+Same behavior.
 
