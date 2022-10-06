@@ -7,9 +7,9 @@ from sqlalchemy import CHAR, Column, DateTime, Float, ForeignKey, Index, Integer
 # db: docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:latest
 
 # times out: engine = create_engine("mssql+pyodbc://sa:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
-engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
+engine = create_engine("mssql+pyodbc://sa:Posey3861@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
 
-metadata = MetaData(engine)
-metadata.reflect(engine)  # exits here without message
+metadata = MetaData(engine)  # opens db..
+metadata.reflect(engine)  # meta data shows no tables, exits here without message
 
 print("open with metadata")
