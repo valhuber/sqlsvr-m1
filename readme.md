@@ -1,4 +1,8 @@
-# Test Description
+This documents 3 procedures for testing SqlServer access on an M1 mac.
+
+&nbsp;
+
+# I. Standard Procedure
 
 I have:
 
@@ -59,18 +63,18 @@ The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/
 
 &nbsp;
 
-## I. ODBC Driver procedure
+# II. "Ed King" ODBC Driver procedure
 
 Using [this article (many thanks!!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we use the following procedure/
 
-#### 1. Download `pyodbc-4.0.32.tar.gz`
+### 1. Download `pyodbc-4.0.32.tar.gz` into `project/pyodbc`
 
 I had to unpack it (perhaps due to unfamiliarity with tar files):
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/pyodbc.png?raw=true"></figure>
 
 
-#### 2. Verify `unixodbc`
+### 2. Verify `unixodbc`
 
 ```
 val@Vals-MPB-14 ~ %  brew install unixodbc
@@ -88,24 +92,30 @@ It's here:
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/unixodbc.png?raw=true"></figure>
 
 
-#### 3. Rebuild `pyodbc'
+### 3. Rebuild `pyodbc'
 
 And alter the provided rebuild script:
 
 ```
-pip uninstall pyodbc
+python3 -m pip uninstall pyodbc
 export CPPFLAGS="-I/opt/homebrew/Cellar/unixodbc/2.3.11/include"
 export LDFLAGS="-L/opt/homebrew/Cellar/unixodbc/2.3.11/lib -liodbc -liodbcinst"
 echo "path/to/pyodbc-4.0.32.tar.gz"
-cd /Users/val/dev/pyodbc
+cd pyodbc
 echo "pip install pyodbc-4.0.32.tar.gz failed -- no gz?"
-pip install pyodbc
+python3 -m pip install pyodbc
+cd ..
 ```
 
 and then run __in the venv:__
 
 ```
-(venv) val@Vals-MPB-14 pyodbc % pip install pyodbc       
+(venv) val@Vals-MPB-14 sqlsvr-m1 % python3 -m pip uninstall pyodbc
+WARNING: Skipping pyodbc as it is not installed.
+(venv) val@Vals-MPB-14 sqlsvr-m1 % export CPPFLAGS="-I/opt/homebrew/Cellar/unixodbc/2.3.11/include"
+(venv) val@Vals-MPB-14 sqlsvr-m1 % export LDFLAGS="-L/opt/homebrew/Cellar/unixodbc/2.3.11/lib -liodbc -liodbcinst"
+(venv) val@Vals-MPB-14 sqlsvr-m1 % cd pyodbc
+(venv) val@Vals-MPB-14 pyodbc % python3 -m pip install pyodbc
 Collecting pyodbc
   Using cached pyodbc-4.0.34.tar.gz (271 kB)
   Preparing metadata (setup.py) ... done
@@ -114,13 +124,11 @@ Installing collected packages: pyodbc
   Running setup.py install for pyodbc ... done
 Successfully installed pyodbc-4.0.34
 
-(venv) val@Vals-MPB-14 pyodbc % pip freeze
-pyodbc==4.0.34
-SQLAlchemy==1.4.29
-(venv) val@Vals-MPB-14 pyodbc % 
-```
+[notice] A new release of pip available: 22.2.1 -> 22.2.2
+[notice] To update, run: pip3 install --upgrade pip
+(venv) val@Vals-MPB-14 pyodbc % ```
 
-#### Opens DB, but no tables, reflect fails
+### Opens DB, but no tables, reflect fails
 
 `run.py` does open the database, but no tables and reflect fails
 
@@ -128,18 +136,18 @@ SQLAlchemy==1.4.29
 
 &nbsp;
 
-## Basic ODBC
+# III. Basic ODBC
 
 Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!). 
 
-### Using _"I. ODBC Driver Procedure"_
+### Using _"II. ODBC Driver Procedure"_
 It also just exits without a stacktrace:
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic_odbc.png?raw=true"></figure>
 
 ### Using `requirements.txt`
 
-Instead of _"I. ODBC Driver procedure"_, installed the usual way:
+Instead of _"II. ODBC Driver procedure"_, installed the usual way:
 
 ```
 python3 -m pip install -r requirements.txt
