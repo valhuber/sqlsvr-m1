@@ -3,11 +3,11 @@
 I have:
 
 * an __M1__ Mac
-* Python 3.10.6
+* Python 3.10.6 (via Python.org)
 * Running a SqlServer database under Docker:
 
 ```
-docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.0
+docker run --name sqlsvr-container --net dev-network -p 1433:1433 -d apilogicserver/sqlsvr-m1:version1.0.2
 ```
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/docker-container.png?raw=true"></figure>
@@ -35,11 +35,11 @@ HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 When running this app with the following connect string:
 
 ```python
-# times out: engine = create_engine("mssql+pyodbc://sa:MyPass@word@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
-engine = create_engine("mssql+pyodbc://sa:MyPass@word@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
+# times out: engine = create_engine("mssql+pyodbc://sa:Posey3861@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
+engine = create_engine("mssql+pyodbc://sa:Posey3861@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
 ```
 
-It gets _connection refused_, I suspect due to odbc install/configure.:
+It gets _timeout expired_, I suspect due to odbc install/configure.:
 
 ```log
 (venv) val@Vals-MPB-14 sqlsvr-m1 %  cd /Users/val/dev/examples/sqlsvr-m1 ; /usr/bin/env /Users/val/dev/examples/sqlsvr
@@ -57,9 +57,11 @@ pyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL S
 
 The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8604).
 
+&nbsp;
+
 ## I. ODBC Driver procedure
 
-Using [this article (thanks!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we use the following procedure/
+Using [this article (many thanks!!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we use the following procedure/
 
 #### 1. Download `pyodbc-4.0.32.tar.gz`
 
@@ -100,7 +102,7 @@ echo "pip install pyodbc-4.0.32.tar.gz failed -- no gz?"
 pip install pyodbc
 ```
 
-and then run in the venv:
+and then run __in the venv:__
 
 ```
 (venv) val@Vals-MPB-14 pyodbc % pip install pyodbc       
@@ -120,7 +122,7 @@ SQLAlchemy==1.4.29
 
 #### Opens DB, but no tables, reflect fails
 
-`run.py` does open the database, but no tables and relect fails
+`run.py` does open the database, but no tables and reflect fails
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/no-tables.png?raw=true"></figure>
 
@@ -130,12 +132,17 @@ SQLAlchemy==1.4.29
 
 Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!). 
 
-### Using __I. ODBC Driver Procedure__
+### Using _"I. ODBC Driver Procedure"_
 It also just exits without a stacktrace:
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic_odbc.png?raw=true"></figure>
 
 ### Using `requirements.txt`
 
-Same behavior.
+Instead of _"I. ODBC Driver procedure"_, installed the usual way:
 
+```
+python3 -m pip install -r requirements.txt
+```
+
+and observed same behavior.
