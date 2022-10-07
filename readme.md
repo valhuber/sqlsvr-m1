@@ -33,7 +33,7 @@ RECONFIGURE
 
 &nbsp;
 
-# I. "Standard" Procedure - worked
+# "Standard" Procedure for SQLAlchemy - worked
 
 I have installed the ODBC driver (per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16)), like this:
 
@@ -43,6 +43,12 @@ brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-rel
 brew update
 HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 ```
+I then created a `venv` in the standard manner:
+
+```
+python3 -m pip install -r requirements.txt
+```
+&nbsp;
 
 The `Run SQLAlchemy` launch successfully opens the database and discovers tables:
 
@@ -52,7 +58,19 @@ The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/
 
 &nbsp;
 
-# II. "Ed King" ODBC Driver procedure
+
+# Basic ODBC - worked
+
+Also tried a non-SQLAlchemy connection, per Gord Thompson suggestion (thankyou!). 
+
+
+Appears to run:
+
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic-odbc-runs.png?raw=true"></figure>
+
+&nbsp;
+
+# Appendix: "Ed King" ODBC Driver procedure
 
 I also attempted, without luck, the procedure below...
 
@@ -88,24 +106,3 @@ Observe `Unixodbc` is here:
 `run.py` does open the database, but no tables and reflect fails:
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/no-tables.png?raw=true"></figure>
-
-&nbsp;
-
-# III. Basic ODBC
-
-Tried a non-SQLAlchemy connection per Gord Thompson suggestion (thankyou!). 
-
-### Using _"II. ODBC Driver Procedure"_
-It also just exits without a stacktrace:
-
-<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/basic_odbc.png?raw=true"></figure>
-
-### Using `requirements.txt`
-
-Instead of _"II. ODBC Driver procedure"_, installed the usual way:
-
-```
-python3 -m pip install -r requirements.txt
-```
-
-and observed same behavior.
