@@ -33,7 +33,7 @@ RECONFIGURE
 
 &nbsp;
 
-# I. "Standard" Procedure
+# I. "Standard" Procedure - worked
 
 I have installed the ODBC driver (per [this doc](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver16)), like this:
 
@@ -44,34 +44,21 @@ brew update
 HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 ```
 
-When running this app with the following connect string:
+The `Run SQLAlchemy` launch successfully opens the database and discovers tables:
 
-```python
-# times out: engine = create_engine("mssql+pyodbc://sa:Posey3861@sqlsvr-container:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes")
-engine = create_engine("mssql+pyodbc://sa:Posey3861@localhost:1433/NORTHWND?driver=ODBC+Driver+18+for+SQL+Server&trusted_connection=no&Encrypt=no")
-```
-
-It gets _timeout expired_, I suspect due to odbc install/configure.:
-
-```log
-(venv) val@Vals-MPB-14 sqlsvr-m1 %  cd /Users/val/dev/examples/sqlsvr-m1 ; /usr/bin/env /Users/val/dev/examples/sqlsvr
--m1/venv/bin/python /Users/val/.vscode-insiders/extensions/ms-python.python-2022.14.0/pythonFiles/lib/python/debugpy/a
-dapter/../../debugpy/launcher 62414 -- run.py 
-Traceback (most recent call last):
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3250, in _wrap_pool_connect
-....
-  File "/Users/val/dev/examples/sqlsvr-m1/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 597, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-pyodbc.OperationalError: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired (0) (SQLDriverConnect)')
-
-(venv) val@Vals-MPB-14 sqlsvr-m1 % 
-```
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/standard-procedure-run.png?raw=true"></figure>
 
 The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8604).
 
 &nbsp;
 
 # II. "Ed King" ODBC Driver procedure
+
+I also attempted, without luck, the procedure below...
+
+&nbsp;
+
+&nbsp;
 
 Using [this article (many thanks!!)](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216), we used this procedure:
 
