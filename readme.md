@@ -76,9 +76,14 @@ I had to unpack it (perhaps due to unfamiliarity with tar files):
 
 ### 2. Brew install `unixodbc` and rebuild `pyodbc`
 
-See the screen shot above.
+Execute this procedure as shown in the screen shot above:
 
-`Unixodbc` is here:
+```
+cd pyodbc
+sh rebuild-pyodbc.sh
+```
+
+Observe `Unixodbc` is here:
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/unixodbc.png?raw=true"></figure>
 
