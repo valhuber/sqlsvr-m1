@@ -46,7 +46,7 @@ HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18
 
 The `Run SQLAlchemy` launch successfully opens the database and discovers tables:
 
-<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/standard-procedure-run.png?raw=true"></figure>
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/standard-procedure-runs.png?raw=true"></figure>
 
 The issue is [logged here](https://github.com/sqlalchemy/sqlalchemy/discussions/8604).
 
