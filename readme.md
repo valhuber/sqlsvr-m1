@@ -1,8 +1,6 @@
 # Objective - Reference Example for Mac M1, SqlServer, Python
 
-It appears there has been a good deal of struggle to get this working.  This project is intended to provide the smallest possible sample - a reference implementation.
-
-This documents 3 procedures for testing SqlServer access on an M1 mac.
+It appears there has been a good deal of struggle to get this working.  This project provides the smallest possible sample - a reference implementation.
 
 &nbsp;
 
