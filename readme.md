@@ -80,6 +80,10 @@ Using [this article (many thanks!!)](https://whodeenie.medium.com/installing-pyo
 
 ### 1. Download `pyodbc-4.0.32.tar.gz` into `project/pyodbc`
 
+I obtained this from PyPi:
+
+<figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/pypi-pyodbc.png?raw=true"></figure>
+
 I had to unpack it (perhaps due to unfamiliarity with tar files):
 
 <figure><img src="https://github.com/valhuber/sqlsvr-m1/blob/main/images/pyodbc.png?raw=true"></figure>
